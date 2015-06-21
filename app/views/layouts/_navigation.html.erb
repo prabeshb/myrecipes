@@ -6,5 +6,25 @@
       <%= link_to "Blog", "", class:"btn btn-default btn-warning" %>
       <%= link_to "Contact Me", "", class:"btn btn-default btn-warning" %>
     </div>
+    <div class="nav_item pull-right">
+      <% if logged_in? %>
+        <ul>
+          <li class="dropdown">
+            <%= link_to '#', class: 'btn btn-default btn-warning dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+              <%= current_user.chefname %><b class="caret"></b>
+            <% end %>
+            <ul class="dropdown-menu">
+              <li><%= link_to "View Profile", chef_path(current_user) %></li>
+              <li><%= link_to "Edit Profile", edit_chef_path(current_user) %></li>
+              <li class="divider"></li>
+              <li><%= link_to "Logout", logout_path %></li>
+            </ul>
+          </li>
+        </ul>
+      <% else %>
+        <%= link_to "Sign Up", register_path, class:"btn btn-default btn-success" %>&nbsp;
+        <%= link_to "Login", login_path, class:"btn btn-default btn-success" %>
+      <% end %>
+    </div>
   </div>
 </header>
