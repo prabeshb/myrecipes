@@ -4,12 +4,35 @@
     <%= link_to image_tag("dicuppy_logo.jpg", size: "75x50"), root_path, class: "navbar-brand", id:"logo" %>
     
     
-    
-    <div class="nav_item">
-      <%= link_to "Recipes", recipes_path, class:"btn btn-default btn-warning"  %>
-      <%= link_to "Blog", "", class:"btn btn-default btn-warning" %>
-      <%= link_to "Contact Me", "", class:"btn btn-default btn-warning" %>
-    </div>
+       <ul class="nav_ul_item">
+            <li class="dropdown">
+              <%= link_to '#', class: 'btn btn-default btn-warning dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+                Recipes <b class="caret"></b>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to "All Recipes", recipes_path %></li>
+                 <% Style.all.each do |style| %>
+                  <li><%= link_to style.name, style_path(style) %></li>
+                <% end %>
+              </ul>
+            </li>
+          </ul>
+        <% if logged_in? %>
+          <ul class="nav_ul_item">
+            <li class="dropdown">
+              <%= link_to '#', class: 'btn btn-default btn-warning dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+                Add Style/Ingredients <b class="caret"></b>
+              <% end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Add Style ", new_style_path %></li>
+                <li><%= link_to "Add Ingredient ", new_ingredient_path %></li>
+              </ul>
+            </li>
+          </ul>
+        <% end %>  
+          <ul class="nav_ul_item">
+            <li><%= link_to "Contact Us", '', class:"btn btn-default btn-warning" %></li>
+          </ul>
     
     <button class="navbar-toggle" data-toggle="collapse" data-target = ".navHeaderCollapse">
       <span class="icon-bar"></span>
